@@ -26,6 +26,7 @@ public class CurveEditor : Editor
                 lineDrawer = curve.AddComponent<LineDrawer>();
             }
             lineDrawer.Clear();
+            lineDrawer.ResetLines();
             lineDrawer.AddLine(line);
             lineDrawer.Draw();
         }

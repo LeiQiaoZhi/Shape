@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MyEditorStyles 
+public static class MyEditorStyles 
 {
     public static GUIStyle GetButtonStyle()
     {

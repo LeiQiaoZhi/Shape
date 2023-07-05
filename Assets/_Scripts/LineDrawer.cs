@@ -10,6 +10,8 @@ public class LineDrawer : MonoBehaviour
     [FormerlySerializedAs("_lines")] [SerializeField]
     private List<Line> lines = new List<Line>();
 
+    public Material material;
+
     private void Start()
     {
         Clear();
@@ -25,7 +27,10 @@ public class LineDrawer : MonoBehaviour
             var child = transform.GetChild(i);
             DestroyImmediate(child.gameObject);
         }
-        // clear lines
+    }
+
+    public void ResetLines()
+    {
         lines = new List<Line>();
     }
 
@@ -55,7 +60,7 @@ public class LineDrawer : MonoBehaviour
         obj.transform.localScale = Vector3.one;
         // add mesh renderer
         var meshRenderer = obj.AddComponent<MeshRenderer>();
-        meshRenderer.sharedMaterial = new Material(Shader.Find("Sprites/Default"));
+        meshRenderer.sharedMaterial = material;
         // add mesh filter
         var meshFilter = obj.AddComponent<MeshFilter>();
         meshFilter.mesh = mesh;
@@ -73,6 +78,8 @@ public class LineDrawer : MonoBehaviour
         Gizmos.color = Color.yellow;
         foreach (var line in lines)
         {
+            if (line.Points.Count == 0)
+                continue;
             for (int i = 0; i < line.Points.Count - 1; i++)
             {
                 Gizmos.DrawSphere(line.Points[i], 0.1f);
